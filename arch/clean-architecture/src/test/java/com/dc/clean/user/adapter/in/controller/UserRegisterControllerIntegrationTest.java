@@ -1,4 +1,4 @@
-package com.dc.clean.user.adapter.controller;
+package com.dc.clean.user.adapter.in.controller;
 
 import com.dc.clean.user.usercase.dto.UserRequestModel;
 import com.dc.clean.user.usercase.dto.UserResponseModel;

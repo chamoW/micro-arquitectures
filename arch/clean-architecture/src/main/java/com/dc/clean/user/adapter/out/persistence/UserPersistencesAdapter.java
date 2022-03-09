@@ -1,15 +1,19 @@
 package com.dc.clean.user.adapter.repository.impl;
 
 import com.dc.clean.user.adapter.model.UserDataMapper;
-import com.dc.clean.user.adapter.repository.JpaUserRepository;
-import com.dc.clean.user.usercase.UserRegisterDsGateway;
+import com.dc.clean.user.adapter.out.persistence.SpringJpaUserRepository;
 import com.dc.clean.user.usercase.dto.UserDsRequestModel;
+import com.dc.clean.user.usercase.port.out.UserRegisterDsGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class JpaUser implements UserRegisterDsGateway {
+/**
+ * UserPersistencesAdapter is the outcomming adapter that implementes the outcomming port UserRegisterDsGateway
+ * and uses the SpringJpaUserRepository
+ */
+public class UserPersistencesAdapter implements UserRegisterDsGateway {
 
     @Autowired
-    private JpaUserRepository repository;
+    private SpringJpaUserRepository repository;
 
 
     @Override

@@ -1,7 +1,7 @@
-package com.dc.clean.user.adapter.controller.response;
+package com.dc.clean.user.adapter.in.controller.response;
 
-import com.dc.clean.user.usercase.UserPresenter;
 import com.dc.clean.user.usercase.dto.UserResponseModel;
+import com.dc.clean.user.usercase.port.out.UserPresenter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 

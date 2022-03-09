@@ -1,16 +1,21 @@
-package com.dc.clean.user.usercase.impl;
+package com.dc.clean.user.usercase;
+
 
 import com.dc.clean.user.entity.UserFactory;
 import com.dc.clean.user.entity.dto.UserDto;
-import com.dc.clean.user.usercase.UserInputBoundary;
-import com.dc.clean.user.usercase.UserPresenter;
-import com.dc.clean.user.usercase.UserRegisterDsGateway;
 import com.dc.clean.user.usercase.dto.UserDsRequestModel;
 import com.dc.clean.user.usercase.dto.UserRequestModel;
 import com.dc.clean.user.usercase.dto.UserResponseModel;
-
+import com.dc.clean.user.usercase.port.in.UserInputBoundary;
+import com.dc.clean.user.usercase.port.out.UserPresenter;
+import com.dc.clean.user.usercase.port.out.UserRegisterDsGateway;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+/**
+ * UserRegistrerInteractor use case implements the incoming port UserInputBoundary
+ * and uses de outcomming ports: UserRegisterDsGateway and UserPresenter
+ */
 public class UserRegisterInteractor implements UserInputBoundary {
 
     final UserRegisterDsGateway userDsGateway;
@@ -32,7 +37,7 @@ public class UserRegisterInteractor implements UserInputBoundary {
         if (!userDto.passwordIsValid()) {
             return userPresenter.prepareFailView("User password must have more than 5 characters.");
         }
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime  now = LocalDateTime.now();
         UserDsRequestModel userDsModel = new UserDsRequestModel(userDto.getName(), userDto.getPassword(), now);
 
         userDsGateway.save(userDsModel);
