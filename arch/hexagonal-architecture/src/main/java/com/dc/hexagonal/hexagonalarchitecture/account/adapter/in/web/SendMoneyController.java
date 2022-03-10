@@ -1,4 +1,4 @@
-package com.dc.hexagonal.hexagonalarchitecture.account.adapter.in;
+package com.dc.hexagonal.hexagonalarchitecture.account.adapter.in.web;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
