@@ -1,4 +1,4 @@
-package com.dc.clean.user.adapter.model;
+package com.dc.clean.user.adapter.out.persistence.model;
 
 
 import javax.persistence.Entity;
