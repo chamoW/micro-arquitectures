@@ -8,28 +8,25 @@ import com.dc.hexagonal.hexagonalarchitecture.account.application.port.in.SendMo
 import com.dc.hexagonal.hexagonalarchitecture.account.application.port.in.dto.SendMoneyDto;
 import com.dc.hexagonal.hexagonalarchitecture.account.domain.Account.AccountId;
 import com.dc.hexagonal.hexagonalarchitecture.account.domain.Money;
+import com.dc.hexagonal.hexagonalarchitecture.common.WebAdapter;
 
 import lombok.RequiredArgsConstructor;
 
+@WebAdapter
 @RestController
 @RequiredArgsConstructor
 public class SendMoneyController {
 
 	private final SendMoneyUseCase sendMoneyUseCase;
 
-	
 	@PostMapping(path = "/accounts/sendMoney/{sourceAccountId}/{targetAccountId}/{amount}")
-	 void sendMoney(
-	 @PathVariable("sourceAccountId") Long sourceAccountId,
-	 @PathVariable("targetAccountId") Long targetAccountId,
-	 @PathVariable("amount") Long amount) {
-	
-	 SendMoneyDto command = new SendMoneyDto(
-	 new AccountId(sourceAccountId),
-	 new AccountId(targetAccountId),
-	 Money.of(amount));
-	
-	 sendMoneyUseCase.sendMoney(command);
-	 }
+	void sendMoney(@PathVariable("sourceAccountId") Long sourceAccountId,
+			@PathVariable("targetAccountId") Long targetAccountId, @PathVariable("amount") Long amount) {
+
+		SendMoneyDto command = new SendMoneyDto(new AccountId(sourceAccountId), new AccountId(targetAccountId),
+				Money.of(amount));
+
+		sendMoneyUseCase.sendMoney(command);
+	}
 
 }
