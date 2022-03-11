@@ -23,16 +23,15 @@ public class ActivityJpaEntity {
 	@GeneratedValue
 	private Long id;
 
-	@Column
 	private LocalDateTime timestamp;
 
-	@Column
+	@Column(name = "owner_account_id")
 	private Long ownerAccountId;
 
-	@Column
+	@Column(name = "source_account_id")
 	private Long sourceAccountId;
 
-	@Column
+	@Column(name = "target_account_id")
 	private Long targetAccountId;
 
 	@Column
