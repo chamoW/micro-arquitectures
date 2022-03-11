@@ -28,14 +28,14 @@ public class SendMoneyService implements SendMoneyUseCase {
 	private final MoneyTransferProperties moneyTransferProperties;
 
 	@Override
-	public boolean sendMoney(SendMoneyDto sendMonetDto) {
-		checkThreshold(sendMonetDto);
+	public boolean sendMoney(SendMoneyDto sendMoneyDto) {
+		checkThreshold(sendMoneyDto);
 
 		LocalDateTime baselineDate = LocalDateTime.now().minusDays(10);
 
-		Account sourceAccount = loadAccountPort.loadAccount(sendMonetDto.getSourceAccountId(), baselineDate);
+		Account sourceAccount = loadAccountPort.loadAccount(sendMoneyDto.getSourceAccountId(), baselineDate);
 
-		Account targetAccount = loadAccountPort.loadAccount(sendMonetDto.getTargetAccountId(), baselineDate);
+		Account targetAccount = loadAccountPort.loadAccount(sendMoneyDto.getTargetAccountId(), baselineDate);
 
 		AccountId sourceAccountId = sourceAccount.getId()
 				.orElseThrow(() -> new IllegalStateException("expected source account ID not to be empty"));
@@ -44,13 +44,13 @@ public class SendMoneyService implements SendMoneyUseCase {
 				.orElseThrow(() -> new IllegalStateException("expected target account ID not to be empty"));
 
 		accountLock.lockAccount(sourceAccountId);
-		if (!sourceAccount.withdraw(sendMonetDto.getMoney(), targetAccountId)) {
+		if (!sourceAccount.withdraw(sendMoneyDto.getMoney(), targetAccountId)) {
 			accountLock.releaseAccount(sourceAccountId);
 			return false;
 		}
 
 		accountLock.lockAccount(targetAccountId);
-		if (!targetAccount.deposit(sendMonetDto.getMoney(), sourceAccountId)) {
+		if (!targetAccount.deposit(sendMoneyDto.getMoney(), sourceAccountId)) {
 			accountLock.releaseAccount(sourceAccountId);
 			accountLock.releaseAccount(targetAccountId);
 			return false;
